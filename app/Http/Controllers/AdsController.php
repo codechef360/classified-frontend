@@ -11,6 +11,7 @@ use App\Models\SubCategory;
 use App\Models\Location;
 use App\Models\Area;
 use App\Models\Ad;
+use App\Models\AdsGallery;
 use App\Models\Wishlist;
 use Carbon\Carbon;
 use Image;
@@ -67,7 +68,8 @@ class AdsController extends Controller
            'package'=>'required',
            'featured_image'=>'required'
        ]);
-       $watermark = public_path('/assets/images/watermark.png');
+
+    $watermark = public_path('/assets/images/watermark.png');
        if (!empty($request->file('featured_image'))) {
            $image = Image::make($request->file('featured_image'));
             $extension = $request->file('featured_image')->getClientOriginalExtension();
@@ -75,10 +77,12 @@ class AdsController extends Controller
             $featured_image = config('app.name').'_' . uniqid() . '_' . time() . '_' . date('Ymd') . '.' . $extension;
             $image->insert($watermark, 'bottom-right', 5, 5);
             $image->save(public_path($dir.$featured_image));
-            //$request->file('featured_image')->move(public_path($dir), $featured_image);
         } else {
             $featured_image = '';
         }
+
+       $package = Package::find($request->package);
+       $current = Carbon::now();
        $ad = new Ad;
        $ad->title = $request->title;
        $ad->description = $request->description;
@@ -88,15 +92,44 @@ class AdsController extends Controller
        $ad->location_id = $request->location;
        $ad->area_id = $request->area;
        $ad->start_date = now();
-       $ad->end_date = now();
-       $ad->package_id = 1; //
+       $ad->end_date = $current->addDays($package->duration);
+       $ad->package_id = $request->package;
        $ad->customer_id = Auth::user()->id;
        $ad->negotiable = 1;
        $ad->featured_image = $featured_image;
        $ad->slug = Str::slug($request->title.'_'.substr(sha1(time()),32,40));
        $ad->save();
+       $adId = $ad->id;
+       #First featured image
+        $image = Image::make($request->file('featured_image'));
+        $extension = $request->file('featured_image')->getClientOriginalExtension();
+        $dir = 'assets/attachments/ads/product_gallery/';
+        $featured_image = config('app.name').'_' . uniqid() . '_' . time() . '_' . date('Ymd') . '.' . $extension;
+        $image->insert($watermark, 'bottom-right', 5, 5);
+        $image->save(public_path($dir.$featured_image));
+        $gallery = new AdsGallery;
+        $gallery->directory = $featured_image;
+        $gallery->ads_id = $adId;
+        $gallery->save();
+
+        if($request->hasfile('product_images'))
+         {
+            foreach($request->file('product_images') as $file)
+            {
+                $image = Image::make($file);
+                 $extension = $file->getClientOriginalExtension();
+                $dir = 'assets/attachments/ads/product_gallery/';
+                $gallery_name = '_' . uniqid() . '_' . time() . '_' . date('Ymd') . '.' . $extension;
+                $image->insert($watermark, 'bottom-right', 5, 5);
+                $image->save(public_path($dir.$gallery_name));
+                $gallery = new AdsGallery;
+                $gallery->directory = $gallery_name;
+                $gallery->ads_id = $adId;
+                $gallery->save();
+            }
+         }
        session()->flash("success", "<strong>Success!</strong> Your ads have been placed.");
-       return back();
+       return redirect()->route('my-adverts');
 
    }
 
@@ -117,7 +150,8 @@ class AdsController extends Controller
    }
 
    public function advertDetail($slug){
-       $advert = Ad::where('slug', $slug)->where('status',1)->first();
+       $advert = Ad::where('slug', $slug)->where('status',1)->orWhere('status',0)->first();
+
        $categories = Category::orderBy('category_name', 'ASC')->get();
         if(!empty($advert)){
             $related = Ad::where('category_id', $advert->category_id)
@@ -129,6 +163,7 @@ class AdsController extends Controller
                 return view('ads.advert-detail', ['detail'=>$advert, 'related'=>$related, 'categories'=>$categories]);
             }
         }else{
+            session()->flash("error", "<strong>Ooops!</strong> This advert must have expired or does not exist.");
             return back();
         }
 
@@ -172,6 +207,11 @@ class AdsController extends Controller
        $comment->save();
        session()->flash("success", "<strong>Success!</strong> Comment registered.");
        return back();
+   }
+
+   public function wishlist(){
+       $wishlists = Wishlist::where('customer_id', Auth::user()->id)->orderBy('id', 'DESC')->get();
+       return view('ads.wishlist',['wishlists'=>$wishlists]);
    }
 /*    public function initializeSubcategories(Request $request){
     $subcategories = SubCategory::where('category_id', $request->cat)->orderBy('sub_category_name', 'ASC')->get();

@@ -40,4 +40,8 @@ class Customer extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function getCustomerAdverts(){
+        return $this->hasMany(Ad::class, 'customer_id');
+    }
 }

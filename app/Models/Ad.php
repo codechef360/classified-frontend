@@ -20,5 +20,9 @@ class Ad extends Model
         return $this->hasMany(AdComment::class, 'advert_id');
     }
 
+    public function getGalleryImages(){
+        return $this->hasMany(AdsGallery::class, 'ads_id');
+    }
+
 
 }

@@ -39,6 +39,16 @@
 
                 </div>
                 <div class="col-xs-12 col-sm-9 col-md-9">
+                    @if(session()->has('success'))
+                        <div class="alert alert-success">
+                           {!! session()->get('success') !!}
+                        </div>
+                    @endif
+                     @if(session()->has('error'))
+                        <div class="alert alert-warning">
+                           {!! session()->get('error') !!}
+                        </div>
+                    @endif
                     <div class="blog-post wow fadeInUp animated" style="visibility: visible; animation-name: fadeInUp;">
                         <table id="myAdverts" class="display" style="width:100%">
                             <thead>

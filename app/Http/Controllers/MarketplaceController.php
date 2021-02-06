@@ -16,11 +16,14 @@ class MarketplaceController extends Controller
 
     public function index()
     {
-        $now = Carbon::now();
+        $now = now();
         $categories = Category::orderBy('category_name', 'ASC')->get();
         $adverts = Ad::orderBy('id', 'DESC')->paginate(20);
         foreach($adverts as $advert){
-            if($advert->end_date > $now->today()){
+            if(strtotime($advert->end_date) > strtotime($now)){
+                $advert->status = 1;
+                $advert->save();
+            }else{
                 $advert->status = 4;
                 $advert->save();
             }

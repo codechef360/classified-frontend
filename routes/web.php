@@ -19,7 +19,7 @@ Route::get('/view-advert/{slug}', [App\Http\Controllers\HomeController::class, '
 Route::get('/contact-vendor/{slug}', [App\Http\Controllers\HomeController::class, 'contactVendor'])->name('contact-vendor');
 
 Auth::routes();
-
+Route::get('/logout',  [App\Http\Controllers\Auth\LoginController::class, 'logout'])->name('logout');
 #Authenticated user
 Route::get('/marketplace', [App\Http\Controllers\MarketplaceController::class, 'index'])->name('marketplace');
 
@@ -34,6 +34,7 @@ Route::get('/my-adverts', [App\Http\Controllers\AdsController::class, 'myAdverts
 Route::get('/advert/view/{slug}', [App\Http\Controllers\AdsController::class, 'advertDetail'])->name('advert-detail');
 Route::post('/leave-comment', [App\Http\Controllers\AdsController::class, 'leaveComment'])->name('leave-comment');
 Route::post('/add-to-wishlist', [App\Http\Controllers\AdsController::class, 'addToWishlist']);
+Route::get('/wishlist', [App\Http\Controllers\AdsController::class, 'wishlist'])->name('wishlist');
 //Route::post('/initialize-subcategories', [App\Http\Controllers\AdsController::class, 'initializeSubcategories']);
 
 #Marketplace routes

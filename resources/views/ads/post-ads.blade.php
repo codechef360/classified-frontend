@@ -95,7 +95,7 @@
                             <div class="col-md-3 col-lg-3">
                                 <div class="wcmp-regi-12">
                                     <label for="reg_username">Price (₦) <span class="required">*</span></label>
-                                    <input type="number" step="0.01" readonly placeholder="Price" class="form-control unicase-form-control " name="price" id="price">
+                                    <input type="number" step="0.01" placeholder="Price" class="form-control unicase-form-control " name="price" id="price">
                                     @error('price')
                                         <i class="text-danger mt-2">{{$message}}</i>
                                     @enderror
@@ -146,13 +146,14 @@
                             <div class="col-md-6 col-sm-6 col-lg-6">
                                 <div class="form-group">
                                     <label for="exampleFormControlFile1">Product images <small>Upload images for this product.</small></label>
-                                    <input type="file" class="form-control-file" id="product_images" name="product_images" multiple>
+                                    <input type="file" class="form-control-file" id="product_images" name="product_images[]" multiple>
                                   </div>
                             </div>
                             <div class="col-md-6 col-sm-6 col-lg-6">
                                 <div class="form-group">
                                     <p><strong>Price:</strong> ₦ <label for="" id="package_price"></label> </p>
                                     <p><strong>Duration:</strong>  <label for="" id="package_duration"></label> days</p>
+                                    <p><input type="hidden" name="hiddenprice" id="hiddenprice"></p>
                                 </div>
                             </div>
                         </div>
@@ -201,7 +202,8 @@
             e.preventDefault();
             var amount = $(this).find(':selected').data('price');
             var duration = $(this).find(':selected').data('duration');
-            $('#price').val(amount);
+            //$('#price').val(amount);
+            $('#hiddenprice').val(amount);
             $('#package_price').text(amount);
             $('#package_duration').text(duration);
             $('#postAdvertBtn').attr('disabled', false)
@@ -222,7 +224,7 @@
         var handler = PaystackPop.setup({
             key: 'pk_test_ec726436a72f60a31b99b173478a569bddd105bc',
             email: '{{Auth::user()->email}}',
-            amount: $('#price').val() * 100,
+            amount: $('#hiddenprice').val() * 100,
             currency: "NGN",
             ref: ''+Math.floor((Math.random() * 1000000000) + 1),
             metadata: {
@@ -236,7 +238,7 @@
             },
             callback: function(response){
                // $('#transaction').val(response.trans);
-                axios.post('/post-ads',new FormData(postAdvertForm))
+                 axios.post('/post-ads',new FormData(postAdvertForm))
                     .then(response=>{
                         Toastify({
                             text: "Success! Advert posted.",
@@ -249,12 +251,8 @@
                             stopOnFocus: true,
                             onClick: function(){}
                         }).showToast();
-                        location.reload();
-                        //window.location.replace(response.data.route);
-                        //window.location = response.data.route;
                     })
                     .catch(error=>{
-                        //$('#validation-errors').html('');
                         $.each(error.response.data.errors, function(key, value){
                             Toastify({
                                 text: value,
@@ -267,12 +265,10 @@
                                 stopOnFocus: true,
                                 onClick: function(){}
                             }).showToast();
-                           // $('#validation-errors').append("<li><i class='ti-hand-point-right text-danger mr-2'></i><small class='text-danger'>"+value+"</small></li>");
+
                         });
                     });
-                //};
-                // }
-                //alert('success. transaction ref is ' + response.reference);
+                    window.location.href = "{{config('app.url')}}/my-adverts";
             },
             onClose: function(){
                 alert('Are you sure you want to terminate this transaction?');

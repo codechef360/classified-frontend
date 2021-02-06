@@ -30,6 +30,8 @@ class CreateCustomersTable extends Migration
             $table->string('company_name')->nullable();
             $table->string('company_address')->nullable();
             $table->string('company_phone')->nullable();
+            $table->string('logo')->nullable()->default('avatar.png');
+            $table->string('avatar')->nullable()->default('avatar.png');
             $table->integer('verification')->nullable()->comment('0=unverified, 1=verified');
             $table->integer('verified_by')->nullable();
             $table->dateTime('date_verified')->nullable();

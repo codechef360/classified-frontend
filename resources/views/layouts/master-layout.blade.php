@@ -40,7 +40,8 @@
                 <li><a href="{{route('marketplace')}}"><i class="icon fa fa-user"></i>Marketplace</a></li>
                 <li><a href="{{route('my-adverts')}}"><i class="icon fa fa-user"></i>My Adverts</a></li>
                 <li><a href="#"><i class="icon fa fa-heart"></i>Wishlist</a></li>
-                <li><a href="#"><i class="icon fa fa-shopping-cart"></i>My Cart</a></li>
+                <li><a href="{{route('logout')}}"><i class="icon fa fa-shopping-cart"></i>My Account</a></li>
+                <li><a href="{{route('logout')}}"><i class="icon fa fa-shopping-cart"></i>Logout</a></li>
               @endif
               @if(!Auth::check())
                 <li><a href="{{route('register')}}"><i class="icon fa fa-check"></i>Register</a></li>
@@ -60,11 +61,8 @@
           <div class="logo"> <a href="home.html"> <img src="/assets/images/logo.png" alt="logo"> </a> </div>
 
         </div>
-        <!-- /.logo-holder -->
-
         <div class="col-lg-5 col-md-5 col-sm-5 col-xs-12 top-search-holder">
-          <!-- /.contact-row -->
-          <!-- ============================= -->
+
           <div class="search-area">
             <form>
               <div class="control-group">
@@ -72,10 +70,7 @@
                 <a class="search-button" href="#" ></a> </div>
             </form>
           </div>
-          <!-- /.search-area -->
-          <!-- ============================================================= SEARCH AREA : END ============================================================= --> </div>
-        <!-- /.top-search-holder -->
-
+        </div>
          <div class="col-lg-5 col-md-5 col-sm-12 col-xs-12 navmenu">
       <div class="yamm navbar navbar-default" role="navigation">
         <div class="navbar-header">
@@ -84,7 +79,6 @@
         </div>
       </div>
       <div class="top-cart-row">
-          <!-- ============================================================= SHOPPING CART DROPDOWN ============================================================= -->
 
           <div class="dropdown dropdown-cart">
               <a href="{{route('post-ads')}}" class="dropdown-toggle lnk-cart">
@@ -111,6 +105,7 @@
 	</div>
 </div>
 <div class="body-content outer-top-ts">
+    @yield('different-layout')
 	<div class="container">
         <div class="row">
             <div class="col-md-12">

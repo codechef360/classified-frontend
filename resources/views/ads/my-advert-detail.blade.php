@@ -25,142 +25,30 @@
                     <div class="product-item-holder size-big single-product-gallery small-gallery">
 
                         <div id="owl-single-product">
-                            <div class="single-product-gallery-item" id="slide1">
-                                <a data-lightbox="image-1" data-title="Gallery" href="/assets/images/products/p1.jpg">
-                                    <img class="img-responsive" alt="" src="/assets/images/blank.gif" data-echo="assets/images/products/p4.jpg" />
-                                </a>
-                            </div>
-
-                            <div class="single-product-gallery-item" id="slide2">
-                                <a data-lightbox="image-1" data-title="Gallery" href="/assets/images/products/p2.jpg">
-                                    <img class="img-responsive" alt="" src="/assets/images/blank.gif" data-echo="assets/images/products/p2.jpg" />
-                                </a>
-                            </div><!-- /.single-product-gallery-item -->
-
-                            <div class="single-product-gallery-item" id="slide3">
-                                <a data-lightbox="image-1" data-title="Gallery" href="/assets/images/products/p3.jpg">
-                                    <img class="img-responsive" alt="" src="/assets/images/blank.gif" data-echo="assets/images/products/p3.jpg" />
-                                </a>
-                            </div><!-- /.single-product-gallery-item -->
-
-                            <div class="single-product-gallery-item" id="slide4">
-                                <a data-lightbox="image-1" data-title="Gallery" href="/assets/images/products/p4.jpg">
-                                    <img class="img-responsive" alt="" src="/assets/images/blank.gif" data-echo="assets/images/products/p1.jpg" />
-                                </a>
-                            </div><!-- /.single-product-gallery-item -->
-
-                            <div class="single-product-gallery-item" id="slide5">
-                                <a data-lightbox="image-1" data-title="Gallery" href="/assets/images/products/p5.jpg">
-                                    <img class="img-responsive" alt="" src="/assets/images/blank.gif" data-echo="assets/images/products/p5.jpg" />
-                                </a>
-                            </div><!-- /.single-product-gallery-item -->
-
-                            <div class="single-product-gallery-item" id="slide6">
-                                <a data-lightbox="image-1" data-title="Gallery" href="/assets/images/products/p6.jpg">
-                                    <img class="img-responsive" alt="" src="assets/images/blank.gif" data-echo="assets/images/products/p6.jpg" />
-                                </a>
-                            </div><!-- /.single-product-gallery-item -->
-
-                            <div class="single-product-gallery-item" id="slide7">
-                                <a data-lightbox="image-1" data-title="Gallery" href="/assets/images/products/p7.jpg">
-                                    <img class="img-responsive" alt="" src="/assets/images/blank.gif" data-echo="assets/images/products/p7.jpg" />
-                                </a>
-                            </div><!-- /.single-product-gallery-item -->
-
-                            <div class="single-product-gallery-item" id="slide8">
-                                <a data-lightbox="image-1" data-title="Gallery" href="/assets/images/products/p8.jpg">
-                                    <img class="img-responsive" alt="" src="/assets/images/blank.gif" data-echo="assets/images/products/p8.jpg" />
-                                </a>
-                            </div><!-- /.single-product-gallery-item -->
-
-                            <div class="single-product-gallery-item" id="slide9">
-                                <a data-lightbox="image-1" data-title="Gallery" href="/assets/images/products/p9.jpg">
-                                    <img class="img-responsive" alt="" src="/assets/images/blank.gif" data-echo="assets/images/products/p9.jpg" />
-                                </a>
-                            </div>
+                            @foreach ($detail->getGalleryImages as $item)
+                                <div class="single-product-gallery-item" id="slide{{$item->id}}">
+                                    <a data-lightbox="image-1" data-title="Gallery" href="/assets/attachments/ads/product_gallery/{{$item->directory ?? ''}}">
+                                        <img class="img-responsive" alt="" src="/assets/images/blank.gif" data-echo="/assets/attachments/ads/product_gallery/{{$item->directory ?? ''}}" />
+                                    </a>
+                                </div>
+                            @endforeach
                         </div>
                         <div class="single-product-gallery-thumbs gallery-thumbs">
-
                             <div id="owl-single-product-thumbnails">
-                                <div class="item">
-                                    <a class="horizontal-thumb active" data-target="#owl-single-product" data-slide="1" href="#slide1">
-                                        <img class="img-responsive" alt="" src="/assets/images/blank.gif" data-echo="assets/images/products/p4.jpg" />
-                                    </a>
-                                </div>
-
-                                <div class="item">
-                                    <a class="horizontal-thumb" data-target="#owl-single-product" data-slide="2" href="#slide2">
-                                        <img class="img-responsive" alt="" src="/assets/images/blank.gif" data-echo="assets/images/products/p2.jpg"/>
-                                    </a>
-                                </div>
-                                <div class="item">
-
-                                    <a class="horizontal-thumb" data-target="#owl-single-product" data-slide="3" href="#slide3">
-                                        <img class="img-responsive" alt="" src="/assets/images/blank.gif" data-echo="assets/images/products/p3.jpg" />
-                                    </a>
-                                </div>
-                                <div class="item">
-
-                                    <a class="horizontal-thumb" data-target="#owl-single-product" data-slide="4" href="#slide4">
-                                        <img class="img-responsive" alt="" src="/assets/images/blank.gif" data-echo="assets/images/products/p1.jpg" />
-                                    </a>
-                                </div>
-                                <div class="item">
-
-                                    <a class="horizontal-thumb" data-target="#owl-single-product" data-slide="5" href="#slide5">
-                                        <img class="img-responsive" alt="" src="/assets/images/blank.gif" data-echo="assets/images/products/p5.jpg" />
-                                    </a>
-                                </div>
-                                <div class="item">
-
-                                    <a class="horizontal-thumb" data-target="#owl-single-product" data-slide="6" href="#slide6">
-                                        <img class="img-responsive" alt="" src="/assets/images/blank.gif" data-echo="assets/images/products/p6.jpg" />
-                                    </a>
-                                </div>
-                                <div class="item">
-
-                                    <a class="horizontal-thumb" data-target="#owl-single-product" data-slide="7" href="#slide7">
-                                        <img class="img-responsive" alt="" src="/assets/images/blank.gif" data-echo="assets/images/products/p7.jpg" />
-                                    </a>
-                                </div>
-                                <div class="item">
-
-                                    <a class="horizontal-thumb" data-target="#owl-single-product" data-slide="8" href="#slide8">
-                                        <img class="img-responsive" alt="" src="/assets/images/blank.gif" data-echo="assets/images/products/p8.jpg" />
-                                    </a>
-                                </div>
-                                <div class="item">
-
-                                    <a class="horizontal-thumb" data-target="#owl-single-product" data-slide="9" href="#slide9">
-                                        <img class="img-responsive" alt="" src="/assets/images/blank.gif" data-echo="/assets/images/products/p9.jpg" />
-                                    </a>
-                                </div>
-                            </div><!-- /#owl-single-product-thumbnails -->
-
-
-
-                        </div><!-- /.gallery-thumbs -->
-
-                    </div><!-- /.single-product-gallery -->
-                </div><!-- /.gallery-holder -->
+                                @foreach ($detail->getGalleryImages as $thumbnail)
+                                    <div class="item">
+                                        <a class="horizontal-thumb active" data-target="#owl-single-product" data-slide="{{$thumbnail->id}}" href="#slide{{$thumbnail->id}}">
+                                            <img class="img-responsive" alt="" src="/assets/images/blank.gif" data-echo="/assets/attachments/ads/product_gallery/{{$thumbnail->directory ?? ''}}" />
+                                        </a>
+                                    </div>
+                                @endforeach
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <div class='col-sm-7 col-md-5 product-info-block'>
                     <div class="product-info">
                         <h1 class="name">{{$detail->title ?? ''}}</h1>
-
-                        <div class="rating-reviews m-t-20">
-                            <div class="row">
-                                <div class="col-lg-12">
-                                    <div class="pull-left">
-                                        <div class="rating rateit-small"></div>
-                                    </div>
-                                    <div class="pull-left">
-                                        <div class="reviews">
-                                            <a href="#" class="lnk">(13 Reviews)</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div><!-- /.row -->
-                        </div><!-- /.rating-reviews -->
                         <div class="price-container info-container m-t-20">
                             <div class="row">
                                 <div class="col-sm-12 col-xs-12 col-md-6 col-lg-6">
@@ -191,9 +79,10 @@
                 </div>
                 <div class="col-lg-3 col-sm-12 col-md-3">
                     <div class="store-details">
-                        <img alt="" src="assets/images/brands/store.png"/>
-                        <h2><a href="#">{{$detail->getCustomer->first_name ?? '' }} {{$detail->getCustomer->surname ?? ''}}</a></h2>
-                        <p> nisi ut aliquip.</p>
+                        <img alt="" height="100" width="100" src="/assets/attachments/logos/{{$detail->getCustomer->logo ?? $detail->getCustomer->avatar}}"/>
+                        <h2><a href="#">{{$detail->getCustomer->company_name ?? $detail->getCustomer->first_name }} </a></h2>
+                        <p> <strong>Office Address: </strong> {{$detail->getCustomer->company_address ?? ''}}</p>
+                        <p> <strong>Office Phone: </strong> {{$detail->getCustomer->company_phone ?? ''}}</p>
                     </div>
                 </div>
             </div><!-- /.row -->
@@ -204,7 +93,6 @@
                     <ul id="product-tabs" class="nav nav-tabs nav-tab-cell">
                         <li class="active"><a data-toggle="tab" href="#description">Description</a></li>
                         <li><a data-toggle="tab" href="#vendor">Vendor</a></li>
-                        <li><a data-toggle="tab" href="#review">Review</a></li>
                     </ul>
                 </div>
                 <div class="col-sm-9">
@@ -224,109 +112,12 @@
                                 </p>
                             </div>
                         </div>
-                        <div id="review" class="tab-pane">
-                            <div class="product-tab">
-                                <div class="product-reviews">
-                                    <h4 class="title">Customer Reviews</h4>
-
-                                    <div class="reviews">
-                                        <div class="review">
-                                            <div class="review-title"><span class="summary">We love this product</span><span class="date"><i class="fa fa-calendar"></i><span>1 days ago</span></span></div>
-                                            <div class="text">"Lorem ipsum dolor sit amet, consectetur adipiscing elit.Aliquam suscipit."</div>
-                                        </div>
-
-                                    </div><!-- /.reviews -->
-                                </div><!-- /.product-reviews -->
-
-
-
-                                <div class="product-add-review">
-                                    <h4 class="title">Write your own review</h4>
-                                    <div class="review-table">
-                                        <div class="table-responsive">
-                                            <table class="table">
-                                                <thead>
-                                                <tr>
-                                                    <th class="cell-label">&nbsp;</th>
-                                                    <th>1 star</th>
-                                                    <th>2 stars</th>
-                                                    <th>3 stars</th>
-                                                    <th>4 stars</th>
-                                                    <th>5 stars</th>
-                                                </tr>
-                                                </thead>
-                                                <tbody>
-                                                <tr>
-                                                    <td class="cell-label">Quality</td>
-                                                    <td><input type="radio" name="quality" class="radio" value="1"></td>
-                                                    <td><input type="radio" name="quality" class="radio" value="2"></td>
-                                                    <td><input type="radio" name="quality" class="radio" value="3"></td>
-                                                    <td><input type="radio" name="quality" class="radio" value="4"></td>
-                                                    <td><input type="radio" name="quality" class="radio" value="5"></td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="cell-label">Price</td>
-                                                    <td><input type="radio" name="quality" class="radio" value="1"></td>
-                                                    <td><input type="radio" name="quality" class="radio" value="2"></td>
-                                                    <td><input type="radio" name="quality" class="radio" value="3"></td>
-                                                    <td><input type="radio" name="quality" class="radio" value="4"></td>
-                                                    <td><input type="radio" name="quality" class="radio" value="5"></td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="cell-label">Value</td>
-                                                    <td><input type="radio" name="quality" class="radio" value="1"></td>
-                                                    <td><input type="radio" name="quality" class="radio" value="2"></td>
-                                                    <td><input type="radio" name="quality" class="radio" value="3"></td>
-                                                    <td><input type="radio" name="quality" class="radio" value="4"></td>
-                                                    <td><input type="radio" name="quality" class="radio" value="5"></td>
-                                                </tr>
-                                                </tbody>
-                                            </table><!-- /.table .table-bordered -->
-                                        </div><!-- /.table-responsive -->
-                                    </div><!-- /.review-table -->
-
-                                    <div class="review-form">
-                                        <div class="form-container">
-                                            <form class="cnt-form">
-
-                                                <div class="row">
-                                                    <div class="col-sm-6">
-                                                        <div class="form-group">
-                                                            <label for="exampleInputName">Your Name <span class="astk">*</span></label>
-                                                            <input type="text" class="form-control txt" id="exampleInputName" placeholder="">
-                                                        </div><!-- /.form-group -->
-                                                        <div class="form-group">
-                                                            <label for="exampleInputSummary">Summary <span class="astk">*</span></label>
-                                                            <input type="text" class="form-control txt" id="exampleInputSummary" placeholder="">
-                                                        </div><!-- /.form-group -->
-                                                    </div>
-
-                                                    <div class="col-md-6">
-                                                        <div class="form-group">
-                                                            <label for="exampleInputReview">Review <span class="astk">*</span></label>
-                                                            <textarea class="form-control txt txt-review" id="exampleInputReview" rows="4" placeholder=""></textarea>
-                                                        </div><!-- /.form-group -->
-                                                    </div>
-                                                </div><!-- /.row -->
-
-                                                <div class="action text-right">
-                                                    <button class="btn btn-primary btn-upper">SUBMIT REVIEW</button>
-                                                </div><!-- /.action -->
-
-                                            </form><!-- /.cnt-form -->
-                                        </div><!-- /.form-container -->
-                                    </div><!-- /.review-form -->
-
-                                </div><!-- /.product-add-review -->
-
-                            </div><!-- /.product-tab -->
-                        </div>
                     </div>
                 </div>
             </div>
         </div>
         <section class="section wow fadeInUp">
-            <h3 class="section-title">Related Products {{$related/*->where('status', 1)*/->count()}}</h3>
+            <h3 class="section-title">Related Products </h3>
             <div class="new-arriavls">
                 <div class="owl-carousel home-owl-carousel custom-carousel owl-theme outer-top-xs">
                     @if($related->count() > 0 )
